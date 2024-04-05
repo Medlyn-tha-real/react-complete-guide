@@ -14,18 +14,19 @@ class App extends Component {
   };
 
 
-
-  nameChangedHandler = (event, id) => {
+  nameChangedHandler = (event, index) => {
     const personIndex = this.state.persons.findIndex(p => {
-      return p.id === id;
+      return p.id === index;
     });
+
+    
     const person  = {
       ...this.state.persons[personIndex]
     };
-
     person.name = event.target.value;
+
+
     const people = [...this.state.persons];
-    
     people[personIndex] = person;
 
     this.setState({ persons: people});
@@ -50,39 +51,49 @@ class App extends Component {
 
   render() {
     const stylingButton = {
-      backgroundColor: "white",
+      backgroundColor: "green",
+      color: "white",
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer",
+      cursor: "pointer"
     };
 
     let personss = null;
 
     if (this.state.showPersons) {
       personss = (
-        <div>
+        <div> 
           {this.state.persons.map((person, index) => {
             return <Person
               click={() => this.deletePersonHandler(index)} 
               name={person.name} age={person.age}
               key={person.id}
-              changed={(event) => this.nameChangedHandler(event, person.id)}>Me into you</Person>;
+              changed={(event) => this.nameChangedHandler(event, person.id)}>Me into React</Person>;
           })}
         </div>
       );
+      stylingButton.backgroundColor = "red";
     } 
-    
 
+    const classes = []
+    if(this.state.persons.length <= 2) {
+      classes.push("first");  /* classes = ['red] */
+    }
+    if(this.state.persons.length <= 1) {
+      classes.push("second");  /* classes = ['red', 'bold] */
+    }
+    
+  
     return (
-      <div className="App">
-        <h1>Hi, i'm a React App</h1>
-        <h3>This is really working!</h3>
-        <button style={stylingButton} onClick={this.tooglePersonsHandler}>
-          Toggle Persons
-        </button>
-        {personss}
-      </div>
+        <div className="App">
+          <h1>Hi, i'm a React App</h1>
+          <h3 className={classes.join(" ")}>This is really working!</h3>
+          <button style={stylingButton} onClick={this.tooglePersonsHandler}>
+            Toggle Persons
+          </button>
+          {personss}
+        </div>
     );
   }
 }

@@ -3,18 +3,35 @@
 }
 
 div > h3{
-  border: 2px solid red;
+  /* border: 2px solid red; */
   margin: 10px auto;
-  font-family: monospace;
+  /* font-family: monospace; */
   font-size: 15px;
   padding: 20px 10px;
   display: block;
   width: 300px;
 }
 
+.first {
+  color: red;
+}
 
 
+.second {
+  font-weight: bold;
+}
 
+.red {
+  background: red;
+  color: white;
+}
+.red:hover {
+  background: salmon;
+  color: white;
+}
+/* .bold {
+
+} */
 
 
 
